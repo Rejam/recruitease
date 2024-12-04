@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Candidate;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CandidateFactory extends Factory
 {
@@ -23,7 +22,6 @@ class CandidateFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->safeEmail(),
-            'job_title' => $this->faker->word(),
             'resume' => $this->faker->text(),
         ];
     }

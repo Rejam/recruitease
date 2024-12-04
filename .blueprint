@@ -18,10 +18,52 @@ created:
     - app/Models/Employer.php
     - app/Models/Vacancy.php
 models:
-    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    User:
+        {
+            name: string,
+            email: string,
+            email_verified_at: "datetime nullable",
+            password: string,
+            remember_token: "string nullable",
+        }
     Recruiter: { name: string, email: string, job_title: string }
-    Candidate: { name: string, email: 'string unique', job_title: string, resume: 'longtext nullable', relationships: { hasMany: 'Application, Qualification' } }
-    Qualification: { name: string, description: longtext, received_at: date, candidate_id: 'id foreign', relationships: { belongsTo: Candidate } }
-    Application: { status: 'enum:draft,pending,accepted,rejected', sent_at: timestamp, vacancy_id: 'id foreign', candidate_id: 'id foreign', relationships: { belongsTo: 'Vacancy, Candidate' } }
-    Vacancy: { title: string, description: longtext, status: 'enum:draft,published,filled', start_date: date, contract_type: 'enum:full-time,part-time,consultant', location: string, employer_id: 'id foreign', relationships: { hasMany: Application, belongsTo: Employer } }
-    Employer: { name: string, email: 'string unique', relationships: { hasMany: Vacancy } }
+    Candidate:
+        {
+            name: string,
+            email: "string unique",
+            resume: "longtext nullable",
+            relationships: { hasMany: "Application, Qualification" },
+        }
+    Qualification:
+        {
+            name: string,
+            description: longtext,
+            received_at: date,
+            candidate_id: "id foreign",
+            relationships: { belongsTo: Candidate },
+        }
+    Application:
+        {
+            status: "enum:draft,pending,accepted,rejected",
+            sent_at: timestamp,
+            vacancy_id: "id foreign",
+            candidate_id: "id foreign",
+            relationships: { belongsTo: "Vacancy, Candidate" },
+        }
+    Vacancy:
+        {
+            title: string,
+            description: longtext,
+            status: "enum:draft,published,filled",
+            start_date: date,
+            contract_type: "enum:full-time,part-time,consultant",
+            location: string,
+            employer_id: "id foreign",
+            relationships: { hasMany: Application, belongsTo: Employer },
+        }
+    Employer:
+        {
+            name: string,
+            email: "string unique",
+            relationships: { hasMany: Vacancy },
+        }

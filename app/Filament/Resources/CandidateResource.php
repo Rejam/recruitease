@@ -3,15 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CandidateResource\Pages;
-use App\Filament\Resources\CandidateResource\RelationManagers;
 use App\Models\Candidate;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CandidateResource extends Resource
 {
@@ -28,8 +28,6 @@ class CandidateResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required(),
-                Forms\Components\TextInput::make('job_title')
-                    ->required(),
                 Forms\Components\TextInput::make('resume'),
                 Forms\Components\TextInput::make('recruiter_id')
                     ->required()
@@ -45,10 +43,9 @@ class CandidateResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('job_title')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('resume')
-                    ->searchable(),
+                    ->searchable()
+                    ->wrap(100)->limit(100),
                 Tables\Columns\TextColumn::make('recruiter_id')
                     ->numeric()
                     ->sortable(),
@@ -81,12 +78,27 @@ class CandidateResource extends Resource
         ];
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Details')->schema([
+
+                    Infolists\Components\TextEntry::make('name'),
+                    Infolists\Components\TextEntry::make('email'),
+                    Infolists\Components\TextEntry::make('resume')
+                        ->columnSpanFull(),
+                ]),
+
+            ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListCandidates::route('/'),
             'create' => Pages\CreateCandidate::route('/create'),
-            'edit' => Pages\EditCandidate::route('/{record}/edit'),
+            'view' => Pages\ViewCandidate::route('/{record}'),
         ];
     }
 }

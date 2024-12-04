@@ -7,7 +7,6 @@ models:
   Candidate:
     name: string
     email: string unique
-    job_title: string
     resume: longtext nullable
     relationships:
       hasMany: Application, Qualification

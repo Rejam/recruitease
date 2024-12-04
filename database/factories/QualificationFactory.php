@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Candidate;
 use App\Models\Qualification;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QualificationFactory extends Factory
 {
@@ -22,8 +21,8 @@ class QualificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'description' => $this->faker->text(),
+            'name' => $this->faker->randomElement(['Bachelor', 'Master', 'PhD', 'Certification', 'Diploma']),
+            'description' => $this->faker->realText(),
             'received_at' => $this->faker->date(),
             'candidate_id' => Candidate::factory(),
         ];
