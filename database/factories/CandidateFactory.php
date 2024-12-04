@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Candidate;
+use App\Models\Qualification;
 use App\Models\Recruiter;
 
 class CandidateFactory extends Factory
@@ -27,6 +28,7 @@ class CandidateFactory extends Factory
             'job_title' => $this->faker->word(),
             'resume' => $this->faker->word(),
             'recruiter_id' => Recruiter::factory(),
+            'qualification_id' => Qualification::factory(),
         ];
     }
 }

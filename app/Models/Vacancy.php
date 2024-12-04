@@ -38,9 +38,9 @@ class Vacancy extends Model
         'employer_id' => 'integer',
     ];
 
-    public function candidates(): HasMany
+    public function applications(): HasMany
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(Application::class);
     }
 
     public function employers(): BelongsToMany

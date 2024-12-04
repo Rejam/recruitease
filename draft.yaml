@@ -4,14 +4,15 @@ models:
     email: string
     job_title: string
     relationships:
-      hasMany: Candidate
+      hasMany: Candidate nullable
 
   Candidate:
     name: string
-    email: string
+    email: string unique
     job_title: string
     resume: string nullable
     recruiter_id: id foreign
+    qualification_id: id foreign
     relationships:
       belongsToMany: Recruiter
       hasMany: Application
@@ -31,6 +32,12 @@ models:
     relationships:
       belongsToMany: Candidate, Vacancy
 
+  Employer:
+    name: string
+    email: string unique
+    relationships:
+      hasMany: Vacancy
+
   Vacancy:
     title: string
     description: longtext
@@ -40,11 +47,5 @@ models:
     location: string
     employer_id: id foreign
     relationships:
-      hasMany: Candidate
+      hasMany: Application
       belongsToMany: Employer
-
-  Employer:
-    name: string
-    email: string
-    relationships:
-      hasMany: Vacancy

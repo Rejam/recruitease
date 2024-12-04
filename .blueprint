@@ -3,29 +3,29 @@ created:
     - database/factories/CandidateFactory.php
     - database/factories/QualificationFactory.php
     - database/factories/ApplicationFactory.php
-    - database/factories/VacancyFactory.php
     - database/factories/EmployerFactory.php
-    - database/migrations/2024_12_04_192554_create_recruiters_table.php
-    - database/migrations/2024_12_04_192555_create_candidates_table.php
-    - database/migrations/2024_12_04_192556_create_qualifications_table.php
-    - database/migrations/2024_12_04_192557_create_applications_table.php
-    - database/migrations/2024_12_04_192558_create_vacancies_table.php
-    - database/migrations/2024_12_04_192559_create_employers_table.php
-    - database/migrations/2024_12_04_192600_create_candidate_recruiter_table.php
-    - database/migrations/2024_12_04_192601_create_application_candidate_table.php
-    - database/migrations/2024_12_04_192602_create_application_vacancy_table.php
-    - database/migrations/2024_12_04_192603_create_employer_vacancy_table.php
+    - database/factories/VacancyFactory.php
+    - database/migrations/2024_12_04_211621_create_recruiters_table.php
+    - database/migrations/2024_12_04_211622_create_candidates_table.php
+    - database/migrations/2024_12_04_211623_create_qualifications_table.php
+    - database/migrations/2024_12_04_211624_create_applications_table.php
+    - database/migrations/2024_12_04_211625_create_employers_table.php
+    - database/migrations/2024_12_04_211626_create_vacancies_table.php
+    - database/migrations/2024_12_04_211627_create_candidate_recruiter_table.php
+    - database/migrations/2024_12_04_211628_create_application_candidate_table.php
+    - database/migrations/2024_12_04_211629_create_application_vacancy_table.php
+    - database/migrations/2024_12_04_211630_create_employer_vacancy_table.php
     - app/Models/Recruiter.php
     - app/Models/Candidate.php
     - app/Models/Qualification.php
     - app/Models/Application.php
-    - app/Models/Vacancy.php
     - app/Models/Employer.php
+    - app/Models/Vacancy.php
 models:
     User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
-    Recruiter: { name: string, email: string, job_title: string, relationships: { hasMany: Candidate } }
-    Candidate: { name: string, email: string, job_title: string, resume: 'string nullable', recruiter_id: 'id foreign', relationships: { belongsToMany: Recruiter, hasMany: Application } }
+    Recruiter: { name: string, email: string, job_title: string, relationships: { hasMany: 'Candidate nullable' } }
+    Candidate: { name: string, email: 'string unique', job_title: string, resume: 'string nullable', recruiter_id: 'id foreign', qualification_id: 'id foreign', relationships: { belongsToMany: Recruiter, hasMany: Application } }
     Qualification: { name: string, description: longtext, received_at: date, relationships: { hasMany: Candidate } }
     Application: { status: 'enum:draft,pending,accepted,rejected', sent_at: timestamp, candidate_id: 'id foreign', vacancy_id: 'id foreign', relationships: { belongsToMany: 'Candidate, Vacancy' } }
-    Vacancy: { title: string, description: longtext, status: 'enum:draft,published,filled', start_date: date, contract_type: 'enum:full-time,part-time,consultant', location: string, employer_id: 'id foreign', relationships: { hasMany: Candidate, belongsToMany: Employer } }
-    Employer: { name: string, email: string, relationships: { hasMany: Vacancy } }
+    Vacancy: { title: string, description: longtext, status: 'enum:draft,published,filled', start_date: date, contract_type: 'enum:full-time,part-time,consultant', location: string, employer_id: 'id foreign', relationships: { hasMany: Application, belongsToMany: Employer } }
+    Employer: { name: string, email: 'string unique', relationships: { hasMany: Vacancy } }

@@ -30,8 +30,8 @@ class Recruiter extends Model
         'id' => 'integer',
     ];
 
-    public function candidates(): HasMany
+    public function candidateNullables(): HasMany
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(CandidateNullable::class);
     }
 }

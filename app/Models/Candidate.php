@@ -23,6 +23,7 @@ class Candidate extends Model
         'job_title',
         'resume',
         'recruiter_id',
+        'qualification_id',
     ];
 
     /**
@@ -33,6 +34,7 @@ class Candidate extends Model
     protected $casts = [
         'id' => 'integer',
         'recruiter_id' => 'integer',
+        'qualification_id' => 'integer',
     ];
 
     public function recruiters(): BelongsToMany
@@ -48,5 +50,10 @@ class Candidate extends Model
     public function recruiter(): BelongsTo
     {
         return $this->belongsTo(Recruiter::class);
+    }
+
+    public function qualification(): BelongsTo
+    {
+        return $this->belongsTo(Qualification::class);
     }
 }
