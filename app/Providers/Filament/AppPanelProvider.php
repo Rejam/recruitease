@@ -27,9 +27,27 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('')
             ->login()
+            // Tailwind colour palettes
             ->colors([
-                'primary' => Color::Amber,
+                'danger' => Color::Rose,
+                // 'gray' => Color::Gray,
+                'gray' => Color::Slate,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
+            // all google fonts available
+            ->font('montserrat')
+            // ->font('poppins')
+            // ->font('playfair')
+
+            // update brand
+            ->brandName('Recruitease')
+            ->brandLogo(asset('assets/logo.svg'))
+            ->darkModeBrandLogo(asset('assets/logo-dark.svg'))
+            ->favicon(asset('assets/favicon.ico'))
+
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
