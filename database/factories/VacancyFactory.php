@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Employer;
 use App\Models\Vacancy;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VacancyFactory extends Factory
 {
@@ -24,9 +23,9 @@ class VacancyFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text(),
-            'status' => $this->faker->randomElement(["draft","published","filled"]),
+            'status' => $this->faker->randomElement(['draft', 'published', 'filled']),
             'start_date' => $this->faker->date(),
-            'contract_type' => $this->faker->randomElement(["full-time","part-time","consultant"]),
+            'contract_type' => $this->faker->randomElement(['full-time', 'part-time', 'consultant']),
             'location' => $this->faker->word(),
             'employer_id' => Employer::factory(),
         ];

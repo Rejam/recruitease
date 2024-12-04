@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'recruiter_id' => fake()->randomElement($recruiters)->id,
         ]);
 
-        $employers = Employer::factory(20)->has(
+        $employers = Employer::factory(10)->has(
             Vacancy::factory(fake()->randomDigit())
         )->create();
 
