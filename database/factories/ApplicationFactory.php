@@ -25,8 +25,8 @@ class ApplicationFactory extends Factory
         return [
             'status' => $this->faker->randomElement(["draft","pending","accepted","rejected"]),
             'sent_at' => $this->faker->dateTime(),
-            'candidate_id' => Candidate::factory(),
             'vacancy_id' => Vacancy::factory(),
+            'candidate_id' => Candidate::factory(),
         ];
     }
 }

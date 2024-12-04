@@ -3,34 +3,30 @@ models:
     name: string
     email: string
     job_title: string
-    relationships:
-      hasMany: Candidate nullable
 
   Candidate:
     name: string
     email: string unique
     job_title: string
-    resume: string nullable
-    recruiter_id: id foreign
-    qualification_id: id foreign
+    resume: longtext nullable
     relationships:
-      belongsToMany: Recruiter
-      hasMany: Application
+      hasMany: Application, Qualification
 
   Qualification:
     name: string
     description: longtext
     received_at: date
+    candidate_id: id foreign
     relationships:
-      hasMany: Candidate
+      belongsTo: Candidate
 
   Application:
     status: enum:draft,pending,accepted,rejected
     sent_at: timestamp
-    candidate_id: id foreign
     vacancy_id: id foreign
+    candidate_id: id foreign
     relationships:
-      belongsToMany: Candidate, Vacancy
+      belongsTo: Vacancy, Candidate
 
   Employer:
     name: string
@@ -48,4 +44,4 @@ models:
     employer_id: id foreign
     relationships:
       hasMany: Application
-      belongsToMany: Employer
+      belongsTo: Employer

@@ -30,6 +30,9 @@ class QualificationResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\DatePicker::make('received_at')
                     ->required(),
+                Forms\Components\Select::make('candidate_id')
+                    ->relationship('candidate', 'name')
+                    ->required(),
             ]);
     }
 
@@ -41,6 +44,9 @@ class QualificationResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('received_at')
                     ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('candidate.name')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

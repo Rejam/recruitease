@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Candidate extends Model
@@ -22,8 +20,6 @@ class Candidate extends Model
         'email',
         'job_title',
         'resume',
-        'recruiter_id',
-        'qualification_id',
     ];
 
     /**
@@ -33,27 +29,15 @@ class Candidate extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'recruiter_id' => 'integer',
-        'qualification_id' => 'integer',
     ];
-
-    public function recruiters(): BelongsToMany
-    {
-        return $this->belongsToMany(Recruiter::class);
-    }
 
     public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
     }
 
-    public function recruiter(): BelongsTo
+    public function qualifications(): HasMany
     {
-        return $this->belongsTo(Recruiter::class);
-    }
-
-    public function qualification(): BelongsTo
-    {
-        return $this->belongsTo(Qualification::class);
+        return $this->hasMany(Qualification::class);
     }
 }

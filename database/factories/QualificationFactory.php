@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Candidate;
 use App\Models\Qualification;
 
 class QualificationFactory extends Factory
@@ -24,6 +25,7 @@ class QualificationFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
             'received_at' => $this->faker->date(),
+            'candidate_id' => Candidate::factory(),
         ];
     }
 }

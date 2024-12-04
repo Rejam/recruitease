@@ -3,12 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployerResource\Pages;
+use App\Filament\Resources\EmployerResource\RelationManagers;
 use App\Models\Employer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployerResource extends Resource
 {
@@ -49,9 +52,7 @@ class EmployerResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                // ->slideOver()
-                ,
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -72,7 +73,7 @@ class EmployerResource extends Resource
         return [
             'index' => Pages\ListEmployers::route('/'),
             'create' => Pages\CreateEmployer::route('/create'),
-            // 'edit' => Pages\EditEmployer::route('/{record}/edit'),
+            'edit' => Pages\EditEmployer::route('/{record}/edit'),
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Recruiter extends Model
 {
@@ -29,9 +28,4 @@ class Recruiter extends Model
     protected $casts = [
         'id' => 'integer',
     ];
-
-    public function candidateNullables(): HasMany
-    {
-        return $this->hasMany(CandidateNullable::class);
-    }
 }

@@ -20,21 +20,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $recruiters = Recruiter::factory(5)->create();
-        $candidates = Candidate::factory(50)->has(
-            Qualification::factory(fake()->randomElement([1, 2, 3]))
-        )->create([
-            'recruiter_id' => fake()->randomElement($recruiters)->id,
-        ]);
+        Recruiter::factory(5)->create();
 
-        $employers = Employer::factory(10)->has(
-            Vacancy::factory(fake()->randomDigit())
+        Candidate::factory(20)->has(
+            Qualification::factory(fake()->numberBetween(1, 3))
         )->create();
 
-        Application::factory(100)->create([
-            'candidate_id' => fake()->randomElement($candidates),
-            // 'vacancy_id' => fake()->randomElement($candidates),
-        ]);
+        Employer::factory(10)->create();
+        Vacancy::factory(50)->create(
+            ['employer_id' => Employer::all()->random()->id]
+        );
+
+        Application::factory(100)->create(
+            [
+                'vacancy_id' => Vacancy::all()->random()->id,
+                'candidate_id' => Candidate::all()->random()->id,
+            ]
+        );
 
         User::factory()->create([
             'name' => 'Ryan James',

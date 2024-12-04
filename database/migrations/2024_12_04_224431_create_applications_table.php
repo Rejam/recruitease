@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->enum('status', ["draft","pending","accepted","rejected"]);
             $table->timestamp('sent_at');
-            $table->foreignId('candidate_id')->constrained();
             $table->foreignId('vacancy_id')->constrained();
+            $table->foreignId('candidate_id')->constrained();
             $table->timestamps();
         });
 

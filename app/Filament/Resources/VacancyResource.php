@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\ContractType;
-use App\Enums\VacancyStatus;
 use App\Filament\Resources\VacancyResource\Pages;
+use App\Filament\Resources\VacancyResource\RelationManagers;
 use App\Models\Vacancy;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VacancyResource extends Resource
 {
@@ -24,26 +25,20 @@ class VacancyResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required(),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Radio::make('status')
-                    ->required()->options(VacancyStatus::class),
+                Forms\Components\TextInput::make('status')
+                    ->required(),
                 Forms\Components\DatePicker::make('start_date')
-                    ->required()
-                    ->native(false),
-                Forms\Components\Select::make('contract_type')
-                    ->required()
-                    ->options(ContractType::class),
+                    ->required(),
+                Forms\Components\TextInput::make('contract_type')
+                    ->required(),
                 Forms\Components\TextInput::make('location')
                     ->required(),
                 Forms\Components\Select::make('employer_id')
                     ->relationship('employer', 'name')
-                    ->required()
-                    ->native(false)
-                    ->searchable()
-                    ->preload(true),
-                // ->isMultiple(true),
+                    ->required(),
             ]);
     }
 

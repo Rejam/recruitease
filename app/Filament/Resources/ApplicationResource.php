@@ -27,9 +27,6 @@ class ApplicationResource extends Resource
                     ->required(),
                 Forms\Components\DateTimePicker::make('sent_at')
                     ->required(),
-                Forms\Components\Select::make('candidate_id')
-                    ->relationship('candidate', 'name')
-                    ->required(),
                 Forms\Components\Select::make('vacancy_id')
                     ->relationship('vacancy', 'title')
                     ->required(),
@@ -44,9 +41,6 @@ class ApplicationResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sent_at')
                     ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('candidate.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('vacancy.title')
                     ->numeric()

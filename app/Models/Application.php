@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Application extends Model
 {
@@ -19,8 +18,8 @@ class Application extends Model
     protected $fillable = [
         'status',
         'sent_at',
-        'candidate_id',
         'vacancy_id',
+        'candidate_id',
     ];
 
     /**
@@ -31,27 +30,17 @@ class Application extends Model
     protected $casts = [
         'id' => 'integer',
         'sent_at' => 'timestamp',
-        'candidate_id' => 'integer',
         'vacancy_id' => 'integer',
+        'candidate_id' => 'integer',
     ];
 
-    public function candidates(): BelongsToMany
+    public function vacancy(): BelongsTo
     {
-        return $this->belongsToMany(Candidate::class);
-    }
-
-    public function vacancies(): BelongsToMany
-    {
-        return $this->belongsToMany(Vacancy::class);
+        return $this->belongsTo(Vacancy::class);
     }
 
     public function candidate(): BelongsTo
     {
         return $this->belongsTo(Candidate::class);
-    }
-
-    public function vacancy(): BelongsTo
-    {
-        return $this->belongsTo(Vacancy::class);
     }
 }

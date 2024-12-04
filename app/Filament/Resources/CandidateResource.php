@@ -31,12 +31,9 @@ class CandidateResource extends Resource
                 Forms\Components\TextInput::make('job_title')
                     ->required(),
                 Forms\Components\TextInput::make('resume'),
-                Forms\Components\Select::make('recruiter_id')
-                    ->relationship('recruiter', 'name')
-                    ->required(),
-                Forms\Components\Select::make('qualification_id')
-                    ->relationship('qualification', 'name')
-                    ->required(),
+                Forms\Components\TextInput::make('recruiter_id')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -52,10 +49,7 @@ class CandidateResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('resume')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('recruiter.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('qualification.name')
+                Tables\Columns\TextColumn::make('recruiter_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Qualification extends Model
 {
@@ -19,6 +19,7 @@ class Qualification extends Model
         'name',
         'description',
         'received_at',
+        'candidate_id',
     ];
 
     /**
@@ -29,10 +30,11 @@ class Qualification extends Model
     protected $casts = [
         'id' => 'integer',
         'received_at' => 'date',
+        'candidate_id' => 'integer',
     ];
 
-    public function candidates(): HasMany
+    public function candidate(): BelongsTo
     {
-        return $this->hasMany(Candidate::class);
+        return $this->belongsTo(Candidate::class);
     }
 }

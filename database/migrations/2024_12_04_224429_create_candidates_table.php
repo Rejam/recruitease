@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('candidate_recruiter', function (Blueprint $table) {
-            $table->foreignId('candidate_id');
-            $table->foreignId('recruiter_id');
+        Schema::create('candidates', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('job_title');
+            $table->longText('resume')->nullable();
+            $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidate_recruiter');
+        Schema::dropIfExists('candidates');
     }
 };
